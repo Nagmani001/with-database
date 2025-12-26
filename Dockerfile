@@ -1,5 +1,7 @@
 FROM node:alpine
 
+RUN apk add --no-cache curl
+
 WORKDIR /usr/home/
 
 RUN npm install -g pnpm 
@@ -10,10 +12,9 @@ RUN pnpm install
 
 COPY . . 
 
-RUN npx prisma migrate dev -name init 
 RUN npx prisma generate
 
-EXPOSE 3000
+EXPOSE 8000
 
-CMD [ "pnpm","dev"]
+CMD ["sh", "-c", "npx prisma migrate dev --name init && pnpm dev"]
 
