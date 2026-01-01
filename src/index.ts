@@ -6,7 +6,13 @@ const prisma = new PrismaClient();
 
 app.use(express.json());
 
+app.get("/health", (req: Request, res: Response) => {
+  res.json({
+    message: "healthy"
+  });
+});
 
+/*
 app.post("/todo", async (req: Request, res: Response) => {
   const { title, description } = req.body;
 
@@ -31,6 +37,7 @@ app.get("/todos", async (req: Request, res: Response) => {
   });
 });
 
+ * */
 app.listen(8000, () => {
   console.log("server is running on port 8000");
 })
